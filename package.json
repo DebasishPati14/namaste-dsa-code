@@ -1,0 +1,27 @@
+{
+  "name": "namaste-dsa-code",
+  "version": "1.0.0",
+  "description": "Practicing DSA by watching Namaste DSA tutorial",
+  "license": "ISC",
+  "author": "DebasishPati14",
+  "type": "commonjs",
+  "main": "index.ts",
+  "scripts": {
+    "start:build": "npx tsc -w",
+    "start:run": "node build/index.js",
+    "start": "concurrently npm:start:*"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.51.0"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
