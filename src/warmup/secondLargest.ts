@@ -17,6 +17,6 @@ function getSecondLargest(arr: number[]): number {
   return secLargeNum;
 }
 
-const secondLargest = getSecondLargest([14, -586]);
+const secondLargest = getSecondLargest([14, -586, 243]);
 // const secondLargest = getSecondLargest([14, 58, 47, 55, 4, 87, 456]);
 console.log({ secondLargest });
