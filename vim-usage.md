@@ -43,3 +43,14 @@
 | Create new file | `:e filename.ts` |
 | Rename file (on disk) | `:!mv old_name.ts new_name.ts` |
 | Delete file (on disk) | :!rm filename.ts |
+
+## 6. Close Language Server Protocol (LSP) When Not Needed
+
+To save system resources, especially on a low RAM machine, you can stop the LSP server when you don't need autocomplete or code intelligence, and restart it later.
+
+| Command | Description |
+| :--- | :--- |
+| `:LspStopServer` | Stops the LSP server and frees up resources. |
+| `:LspStartServer` | Starts the LSP server again when you need it. |
+
+Use these commands inside Vim anytime you want to control the LSP manually.
