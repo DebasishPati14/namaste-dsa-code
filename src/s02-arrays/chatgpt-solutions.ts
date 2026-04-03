@@ -16,7 +16,9 @@ function twoSumOfSortedArray(nums: number[], targetSum: number){
 const numArr =  [2,7,11,15];
 const target = 9;
 
-console.log(`The target sum of array ${numArr} is present in ${twoSumOfSortedArray(numArr, target)}`);
+// console.log(`The target sum of array ${numArr} is present in ${twoSumOfSortedArray(numArr, target)}`);
+
+
 
 
 // QUESTION 2 ------ Square Of Sorted Array
@@ -39,4 +41,69 @@ function squareOfSortedArray(nums: number[]){
 
 const numArr2 =  [-4,-1,0,3,10];
 
-console.log(`The target sum of array ${numArr} is present in ${squareOfSortedArray(numArr2)}`);
+// console.log(`The target sum of array ${numArr2} is present in ${squareOfSortedArray(numArr2)}`);
+
+
+
+
+// QUESTION 3 ------ Pivot Index
+function pivotIndexArray(nums: number[]){
+    let totalSum = 0;
+    
+    for(let i = 0; i < nums.length; i++){
+        totalSum += nums[i]!;
+    }
+
+    let currentSum = 0;
+    for(let i = 0; i < nums.length; i++){
+        if(totalSum - nums[i]! - currentSum == currentSum){
+            return i;
+        }
+        currentSum += nums[i]!;
+    }
+   return -1;
+}
+
+const numArr3 = [1, 3, 7, 6, 5, 6];
+
+console.log(`The pivot index of array ${numArr3} is present in ${ pivotIndexArray(numArr3) }`);
+
+
+
+
+
+
+// QUESTION 4 ------ Majority Element
+function majorityElement(nums: number[]){
+    if(nums.length == 1)
+        return nums[0]!;
+
+    let majorElement = nums[0]!;
+    let count = 1;
+
+    for(let i = 1; i < nums.length; i++){
+        if(majorElement == nums[i]){
+            count++;
+        } else{
+            if(count == 0){
+                majorElement = nums[i]!;
+                count = 1;
+            }else{
+            count--;
+        }
+    }
+    }
+
+    let currentCount = 0;
+    for(let i = 0; i < nums.length; i++){
+        if(nums[i]! == majorElement){
+            currentCount++;
+        }
+    }
+
+    return currentCount > nums.length/2 ? majorElement : NaN; 
+}
+
+const numArr4 = [2,2,1,1,1,2,2];
+
+console.log(`The majority of in the array ${ numArr4 } is ${ majorityElement(numArr4)  }`)
