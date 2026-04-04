@@ -66,7 +66,7 @@ function pivotIndexArray(nums: number[]){
 
 const numArr3 = [1, 3, 7, 6, 5, 6];
 
-console.log(`The pivot index of array ${numArr3} is present in ${ pivotIndexArray(numArr3) }`);
+//console.log(`The pivot index of array ${numArr3} is present in ${ pivotIndexArray(numArr3) }`);
 
 
 
@@ -106,4 +106,40 @@ function majorityElement(nums: number[]){
 
 const numArr4 = [2,2,1,1,1,2,2];
 
-console.log(`The majority of in the array ${ numArr4 } is ${ majorityElement(numArr4)  }`)
+//console.log(`The majority of in the array ${ numArr4 } is ${ majorityElement(numArr4)  }`);
+
+
+
+
+
+
+// QUESTION 5 ------ Rotate Array
+function rotateArray(nums: number[], k: number) {
+    
+    for(let i = 0, j = nums.length - 1; i < nums.length / 2; i++, j--){
+            const temp = nums[j]!;
+            nums[j]! = nums[i]!;
+            nums[i]! = temp;
+    }
+    console.log(`After revertion: `, { nums });
+
+    for(let i = 0, j = k - 1; i < k/2; i++, j--){
+            const temp = nums[j]!;
+            nums[j]! = nums[i]!;
+            nums[i]! = temp;
+    }
+    console.log(`After revertion: `, { nums });
+
+    for(let i = k, j = nums.length - 1; i < nums.length - k/2; i++, j--){
+            const temp = nums[j]!;
+            nums[j]! = nums[i]!;
+            nums[i]! = temp;
+    }
+    return nums;
+}
+
+const numArr5 = [1, 2, 3, 4, 5, 6];
+const k = 3;
+console.log(`The pivot index of array ${numArr5} is present in ${ rotateArray(numArr5, k) }`);
+
+
