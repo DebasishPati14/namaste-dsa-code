@@ -125,6 +125,8 @@ const k = 3;
 console.log(
   `The pivot index of array ${numArr5} is present in ${rotateArray(numArr5, k)}`,
 );
+
+// QUESTION [bonus] ------ Find Subarray Having Sum K
 /* 
 // This is done by me without studing about hashmap thing but this accepts only for the left and right subarrays
 function subArraySumEqualsK(nums: number[], sum: number){
