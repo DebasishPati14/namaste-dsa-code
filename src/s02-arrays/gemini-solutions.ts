@@ -61,20 +61,38 @@ function maxSubArray(nums: number[]): number {
 }
 
 const numArr3 = [1, -2, 3, 4, -1, 5];
-console.log(`Maximum subarray sum of [${numArr3}] is ${maxSubArray(numArr3)}`);
+//console.log(`Maximum subarray sum of [${numArr3}] is ${maxSubArray(numArr3)}`);
 
 // QUESTION 4 ------ Sort Colors
-/*
+
 function sortColors(nums: number[]): number[] {
-  // TODO: Implement
+  let low = 0;
+  let mid = 0;
+  let high = nums.length - 1;
+
+  const swap = (idx1: number, idx2: number) => {
+    const temp = nums[idx1]!;
+    nums[idx1]! = nums[idx2]!;
+    nums[idx2]! = temp;
+  };
+
+  while (mid <= high) {
+    if (nums[mid]! == 0) {
+      swap(low, mid); // swap([l], [m])
+      mid++;
+      low++;
+    } else if (nums[mid]! == 1) {
+      mid++;
+    } else if (nums[mid]! == 2) {
+      swap(high, mid); // swap([h], [m])
+      high--;
+    }
+  }
   return nums;
 }
 
 const numArr4 = [2, 0, 2, 1, 1, 0];
-console.log(
-  `Sorted colors array: ${sortColors(numArr4)}`
-);
-*/
+console.log(`Sorted colors array: ${sortColors(numArr4)}`);
 
 // QUESTION 5 ------ Product of Array Except Self
 /*
