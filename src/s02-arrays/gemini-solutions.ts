@@ -92,20 +92,38 @@ function sortColors(nums: number[]): number[] {
 }
 
 const numArr4 = [2, 0, 2, 1, 1, 0];
-console.log(`Sorted colors array: ${sortColors(numArr4)}`);
+//console.log(`Sorted colors array: ${sortColors(numArr4)}`);
 
 // QUESTION 5 ------ Product of Array Except Self
-/*
+
 function productExceptSelf(nums: number[]): number[] {
-  // TODO: Implement
-  return [];
+  const result: number[] = [];
+  let rightProd = 1;
+  for(let i  = 0; i<nums.length; i++){
+      result[i]! = 1;
+  }
+
+  for(let i = 1; i <nums.length; i++){
+      result[i]! = nums[i - 1]! * result[i - 1]!;
+    //   result[j]! = nums[j + 1]! * result[j + 1 ]!;
+      console.log({ iV: nums[i - 1]! * result[i - 1]!, i, })
+      console.log({ result })
+  }
+  
+   for(let j = nums.length -2; j >= 0;  j--){
+        rightProd *= nums[j + 1]!;
+      result[j]! *= rightProd;
+      console.log({ jV: nums[j + 1]! * result[j + 1]!, j})
+      console.log({ result })
+  }
+  return result;
 }
 
 const numArr5 = [1, 2, 3, 4];
 console.log(
   `Product except self for [${numArr5}] is ${productExceptSelf(numArr5)}`
 );
-*/
+
 
 // QUESTION 6 ------ Find Numbers Disappeared in an Array
 /*
