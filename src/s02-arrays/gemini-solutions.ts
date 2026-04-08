@@ -129,15 +129,23 @@ const numArr5 = [1, 2, 3, 4];
 
 function findDisappearedNumbers(nums: number[]): number[] {
   const result: number[] = [];
-  for(let i = 0; i < nums.length; i++){
-      result[i]! = i;
-  }
 
   for(let i = 0; i < nums.length; i++){
-      if(nums[i] && result[nums[i]!]){
-        result[nums[i]!] =  0;
-      }
+     const index = Math.abs(nums[i]!) - 1;
+
+     if(index < nums.length && nums[index]! > 0){
+         nums[index]! = -nums[index]!;
+     }
+
       console.log({i, nums: nums[i]!});
+  }
+
+
+
+  for(let i = 0; i < nums.length; i++){
+      if(nums[i]! > 0){
+        result.push(i + 1);
+      }
   }
     return result;
 }
