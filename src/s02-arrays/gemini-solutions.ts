@@ -120,23 +120,35 @@ function productExceptSelf(nums: number[]): number[] {
 }
 
 const numArr5 = [1, 2, 3, 4];
-console.log(
-  `Product except self for [${numArr5}] is ${productExceptSelf(numArr5)}`
-);
+//console.log(
+//  `Product except self for [${numArr5}] is ${productExceptSelf(numArr5)}`
+//);
 
 
 // QUESTION 6 ------ Find Numbers Disappeared in an Array
-/*
+
 function findDisappearedNumbers(nums: number[]): number[] {
-  // TODO: Implement
-  return [];
+  const result: number[] = [];
+  for(let i = 0; i < nums.length; i++){
+      result[i]! = i;
+  }
+
+  for(let i = 0; i < nums.length; i++){
+      if(nums[i] && result[nums[i]!]){
+        result[nums[i]!] =  0;
+      }
+      console.log({i, nums: nums[i]!});
+  }
+    return result;
 }
 
 const numArr6 = [4, 3, 2, 7, 8, 2, 3, 1];
 console.log(
   `Missing numbers in [${numArr6}] are ${findDisappearedNumbers(numArr6)}`
 );
-*/
+
+
+
 
 // QUESTION 7 ------ Minimum Size Subarray Sum
 /*
