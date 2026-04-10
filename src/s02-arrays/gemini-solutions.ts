@@ -153,18 +153,39 @@ const numArr6 = [4, 3, 2, 7, 8, 2, 3, 1];
 // );
 
 // QUESTION 7 ------ Minimum Size Subarray Sum
-/*
-function minSubArrayLen(target: number, nums: number[]): number {
-  // TODO: Implement
-  return 0;
+function findMinSubArrayLen(target: number, nums: number[]): number {
+  let leftPointer = 0;
+  let rightPointer = 0;
+  let minSubArr = 0;
+  let currentSum = nums[0]!;
+
+  while(leftPointer < nums.length){
+    if(currentSum < target && rightPointer < nums.length - 1) {
+      rightPointer++;
+      currentSum += nums[rightPointer]!;
+    }else if(currentSum >= target){
+      if(minSubArr == 0 || minSubArr > (rightPointer - leftPointer)){
+        minSubArr = rightPointer - leftPointer + 1;
+      }
+      currentSum -= nums[leftPointer]!;
+      leftPointer++;
+    } else {
+      currentSum -= nums[leftPointer]!;
+      leftPointer++;
+    }
+    console.log({leftPointer, rightPointer, currentSum})
+  }
+
+
+  return minSubArr;
 }
 
-const numArr7 = [2, 3, 1, 2, 4, 3];
-const target7 = 7;
+const numArr7 = [6, 4, 1, 7, 3, 6, 1]; // [2, 3, 1, 2, 4, 3];
+const target7 = 10;
 console.log(
-  `Minimum subarray length for target ${target7} in [${numArr7}] is ${minSubArrayLen(target7, numArr7)}`
+  `Minimum subarray length for target ${target7} in [${numArr7}] is ${findMinSubArrayLen(target7, numArr7)}`
 );
-*/
+
 
 // QUESTION 8 ------ Third Maximum Number
 
