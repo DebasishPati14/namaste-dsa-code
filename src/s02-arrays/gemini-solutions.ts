@@ -180,10 +180,30 @@ function findMinSubArrayLen(target: number, nums: number[]): number {
   return minSubArr;
 }
 
+
+function findMinSubArrayLenOptimal(target: number, nums: number[]): number {
+  let lPointer = 0;
+  let minSubArr = Infinity;
+  let currentSum = 0; // will add inside loop so not [0] value
+
+  for (let rPointer = 0; rPointer < nums.length; rPointer++) {
+    currentSum += nums[rPointer]!;
+
+    while(currentSum >= target){
+      minSubArr = Math.min((rPointer - lPointer) + 1, minSubArr);
+      currentSum = currentSum - nums[lPointer]!;
+      lPointer++;
+    }
+
+    console.log({lPointer, rPointer, currentSum})
+  }
+  return minSubArr === Infinity ? 0 : minSubArr;
+}
+
 const numArr7 = [6, 4, 1, 7, 3, 6, 1]; // [2, 3, 1, 2, 4, 3];
 const target7 = 10;
 console.log(
-  `Minimum subarray length for target ${target7} in [${numArr7}] is ${findMinSubArrayLen(target7, numArr7)}`
+    `Minimum subarray length for target ${target7} in [${numArr7}] is ${findMinSubArrayLen(target7, numArr7)}\nalso from Optiomal${findMinSubArrayLenOptimal(target7, numArr7)}`
 );
 
 
