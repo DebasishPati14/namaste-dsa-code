@@ -99,22 +99,22 @@ const numArr4 = [2, 0, 2, 1, 1, 0];
 function productExceptSelf(nums: number[]): number[] {
   const result: number[] = [];
   let rightProd = 1;
-  for(let i  = 0; i<nums.length; i++){
-      result[i]! = 1;
+  for (let i = 0; i < nums.length; i++) {
+    result[i]! = 1;
   }
 
-  for(let i = 1; i <nums.length; i++){
-      result[i]! = nums[i - 1]! * result[i - 1]!;
+  for (let i = 1; i < nums.length; i++) {
+    result[i]! = nums[i - 1]! * result[i - 1]!;
     //   result[j]! = nums[j + 1]! * result[j + 1 ]!;
-      console.log({ iV: nums[i - 1]! * result[i - 1]!, i, })
-      console.log({ result })
+    console.log({ iV: nums[i - 1]! * result[i - 1]!, i });
+    console.log({ result });
   }
-  
-   for(let j = nums.length -2; j >= 0;  j--){
-        rightProd *= nums[j + 1]!;
-      result[j]! *= rightProd;
-      console.log({ jV: nums[j + 1]! * result[j + 1]!, j})
-      console.log({ result })
+
+  for (let j = nums.length - 2; j >= 0; j--) {
+    rightProd *= nums[j + 1]!;
+    result[j]! *= rightProd;
+    console.log({ jV: nums[j + 1]! * result[j + 1]!, j });
+    console.log({ result });
   }
   return result;
 }
@@ -124,31 +124,27 @@ const numArr5 = [1, 2, 3, 4];
 //  `Product except self for [${numArr5}] is ${productExceptSelf(numArr5)}`
 //);
 
-
 // QUESTION 6 ------ Find Numbers Disappeared in an Array
 
 function findDisappearedNumbers(nums: number[]): number[] {
   const result: number[] = [];
-  for(let i = 0; i < nums.length; i++){
-      result[i]! = i;
+  for (let i = 0; i < nums.length; i++) {
+    result[i]! = i;
   }
 
-  for(let i = 0; i < nums.length; i++){
-      if(nums[i] && result[nums[i]!]){
-        result[nums[i]!] =  0;
-      }
-      console.log({i, nums: nums[i]!});
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] && result[nums[i]!]) {
+      result[nums[i]!] = 0;
+    }
+    console.log({ i, nums: nums[i]! });
   }
-    return result;
+  return result;
 }
 
 const numArr6 = [4, 3, 2, 7, 8, 2, 3, 1];
-console.log(
-  `Missing numbers in [${numArr6}] are ${findDisappearedNumbers(numArr6)}`
-);
-
-
-
+// console.log(
+//   `Missing numbers in [${numArr6}] are ${findDisappearedNumbers(numArr6)}`
+// );
 
 // QUESTION 7 ------ Minimum Size Subarray Sum
 /*
@@ -165,17 +161,32 @@ console.log(
 */
 
 // QUESTION 8 ------ Third Maximum Number
-/*
+
 function thirdMax(nums: number[]): number {
-  // TODO: Implement
-  return 0;
+  let fMax: number | null = null;
+  let sMax: number | null = null;
+  let tMax: number | null = null;
+
+  for (const eachNum of nums) {
+    if (fMax == eachNum || sMax == eachNum || tMax === eachNum) {
+      continue;
+    } else if (fMax == null || eachNum > fMax) {
+      tMax = sMax;
+      sMax = fMax;
+      fMax = eachNum;
+    } else if (sMax == null || eachNum > sMax) {
+      tMax = sMax;
+      sMax = eachNum;
+    } else if (tMax == null || eachNum > tMax) {
+      tMax = eachNum;
+    }
+  }
+
+  return tMax == null ? fMax! : tMax!;
 }
 
 const numArr8 = [2, 2, 3, 1];
-console.log(
-  `Third maximum number in [${numArr8}] is ${thirdMax(numArr8)}`
-);
-*/
+console.log(`Third maximum number in [${numArr8}] is ${thirdMax(numArr8)}`);
 
 // QUESTION 9 ------ Container With Most Water
 /*
