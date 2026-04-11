@@ -260,20 +260,28 @@ function findMaxArea(height: number[]): number {
 }
 
 const numArr9 = [1, 8, 6, 2, 5, 4, 8, 3, 7];
-console.log(
-  `Maximum water container area for [${numArr9}] is ${findMaxArea(numArr9)}`
-);
+//console.log(
+//  `Maximum water container area for [${numArr9}] is ${findMaxArea(numArr9)}`
+//);
 
 
 // QUESTION 10 ------ Running Sum of 1D Array
-/*
+
 function runningSum(nums: number[]): number[] {
-  // TODO: Implement
-  return [];
+   let prefixSum = 0;
+   
+   for(let i = 0; i < nums.length; i++){
+     prefixSum  += nums[i]!;
+
+     nums[i]! = prefixSum;
+
+   }
+
+  return nums;
 }
 
 const numArr10 = [1, 2, 3, 4];
 console.log(
   `Running sum of [${numArr10}] is ${runningSum(numArr10)}`
 );
-*/
+
