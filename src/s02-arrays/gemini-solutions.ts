@@ -202,9 +202,9 @@ function findMinSubArrayLenOptimal(target: number, nums: number[]): number {
 
 const numArr7 = [6, 4, 1, 7, 3, 6, 1]; // [2, 3, 1, 2, 4, 3];
 const target7 = 10;
-console.log(
-    `Minimum subarray length for target ${target7} in [${numArr7}] is ${findMinSubArrayLen(target7, numArr7)}\nalso from Optiomal${findMinSubArrayLenOptimal(target7, numArr7)}`
-);
+//console.log(
+//    `Minimum subarray length for target ${target7} in [${numArr7}] is ${findMinSubArrayLen(target7, numArr7)}\nalso from Optiomal${findMinSubArrayLenOptimal(target7, numArr7)}`
+//);
 
 
 // QUESTION 8 ------ Third Maximum Number
@@ -233,20 +233,37 @@ function thirdMax(nums: number[]): number {
 }
 
 const numArr8 = [2, 2, 3, 1];
-console.log(`Third maximum number in [${numArr8}] is ${thirdMax(numArr8)}`);
+//console.log(`Third maximum number in [${numArr8}] is ${thirdMax(numArr8)}`);
 
 // QUESTION 9 ------ Container With Most Water
-/*
-function maxArea(height: number[]): number {
-  // TODO: Implement
-  return 0;
+
+function findMaxArea(height: number[]): number {
+  let currentArea = 0;
+  let maxArea = 0;
+  let lPointer = 0;
+  let rPointer = height.length - 1;
+
+  while(rPointer > lPointer){
+      const w = rPointer - lPointer; // width between 2 pointers
+      const h = Math.min(height[lPointer]!, height[rPointer]!); // height which wold be the lowest is considered
+      currentArea = h * w; // height * width or rectangle
+      maxArea = Math.max(currentArea, maxArea);
+      
+      if(height[lPointer]! <= height[rPointer]!){          
+          lPointer++;
+      }else{
+          rPointer--;
+      }
+  }
+ 
+  return maxArea;
 }
 
 const numArr9 = [1, 8, 6, 2, 5, 4, 8, 3, 7];
 console.log(
-  `Maximum water container area for [${numArr9}] is ${maxArea(numArr9)}`
+  `Maximum water container area for [${numArr9}] is ${findMaxArea(numArr9)}`
 );
-*/
+
 
 // QUESTION 10 ------ Running Sum of 1D Array
 /*
