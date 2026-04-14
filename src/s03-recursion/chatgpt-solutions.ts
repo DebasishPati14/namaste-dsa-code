@@ -63,24 +63,29 @@ function isNumberPalindrome(num: number){
 const s3 = "recursionoisrucer";
 const n3 = 121;
 
-console.log(`Is number ${n3} a palindrome? ${isNumberPalindrome(n3)}`);
-console.log(`Is string ${s3} a palindrome? ${isStringPalindrome(s3)}`);
-
-
-
+//console.log(`Is number ${n3} a palindrome? ${isNumberPalindrome(n3)}`);
+//console.log(`Is string ${s3} a palindrome? ${isStringPalindrome(s3)}`);
 
 
 // ===============================
-// Question 4: Count Digits
+// QUESTION 4: Remove all occurance of a char
 // ===============================
-/*
-function countDigits(num: number){
-
+function removeOccuranceChar(orgStr: string, remChar: string, newStr:string = '', curIdx: number = 0){
+    if(curIdx == orgStr.length){
+        return newStr;
+    }
+    else {
+        if(orgStr.charAt(curIdx) != remChar){
+            newStr += orgStr.charAt(curIdx); 
+        }
+        curIdx++;
+        return removeOccuranceChar(orgStr, remChar, newStr, curIdx);
+    }
 }
 
-const n4 = 12345;
-console.log(`Total digits in ${n4}: ${countDigits(n4)}`);
-*/
+const str4 = 'recursion';
+const targetChar = 'r';
+//console.log(`The ${str4} will be after removing the char ${targetChar} is: ${ removeOccuranceChar(str4, targetChar, '', 0) }`);
 
 
 
