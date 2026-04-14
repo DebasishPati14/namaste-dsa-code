@@ -17,6 +17,9 @@ function findSumOfDigits(num: number) {
 const n1 = 1234;
 // console.log(`Total sum of digits in ${n1} is: ${findSumOfDigits(n1)}`);
 
+
+
+
 // ===============================
 // Question 2: Reverse a Number
 // ===============================
@@ -34,19 +37,38 @@ function findReverseNum(num: number) {
 }
 
 const n2 = 1234;
-console.log(`The reverse of number ${n2} is: ${findReverseNum(n2)}`);
+//console.log(`The reverse of number ${n2} is: ${findReverseNum(n2)}`);
+
+
+
 
 // ===============================
-// Question 3: Check Palindrome Number
+// Question 3: Check Palindrome Number and String
 // ===============================
-/*
-function isPalindrome(num: number){
+function isStringPalindrome(orgString: string, revString: string = '', curIdx: number = orgString.length - 1){
+  console.log({ revString})
+  if(curIdx < 0){
+    return orgString === revString;
+  }else{
+    revString += orgString.charAt(curIdx)
+    curIdx--;
+    return isStringPalindrome(orgString, revString, curIdx)
+  }
+}
+
+function isNumberPalindrome(num: number){
 
 }
 
+const s3 = "recursionoisrucer";
 const n3 = 121;
-console.log(`Is ${n3} a palindrome? ${isPalindrome(n3)}`);
-*/
+
+console.log(`Is number ${n3} a palindrome? ${isNumberPalindrome(n3)}`);
+console.log(`Is string ${s3} a palindrome? ${isStringPalindrome(s3)}`);
+
+
+
+
 
 // ===============================
 // Question 4: Count Digits
@@ -60,6 +82,9 @@ const n4 = 12345;
 console.log(`Total digits in ${n4}: ${countDigits(n4)}`);
 */
 
+
+
+
 // ===============================
 // Question 5: Find Factorial
 // ===============================
@@ -71,6 +96,9 @@ function findFactorial(num: number){
 const n5 = 5;
 console.log(`Factorial of ${n5} is: ${findFactorial(n5)}`);
 */
+
+
+
 
 // ===============================
 // Question 6: Check Prime Number
@@ -84,6 +112,9 @@ const n6 = 7;
 console.log(`Is ${n6} a prime number? ${isPrime(n6)}`);
 */
 
+
+
+
 // ===============================
 // Question 7: Fibonacci (nth term)
 // ===============================
@@ -95,6 +126,9 @@ function fibonacci(num: number){
 const n7 = 6;
 console.log(`Fibonacci term at position ${n7}: ${fibonacci(n7)}`);
 */
+
+
+
 
 // ===============================
 // Question 8: Find Largest Digit
@@ -108,6 +142,10 @@ const n8 = 93847;
 console.log(`Largest digit in ${n8}: ${findLargestDigit(n8)}`);
 */
 
+
+
+
+
 // ===============================
 // Question 9: Sum of First N Natural Numbers
 // ===============================
@@ -119,6 +157,9 @@ function sumOfNaturalNumbers(num: number){
 const n9 = 10;
 console.log(`Sum of first ${n9} natural numbers: ${sumOfNaturalNumbers(n9)}`);
 */
+
+
+
 
 // ===============================
 // Question 10: Check Armstrong Number
