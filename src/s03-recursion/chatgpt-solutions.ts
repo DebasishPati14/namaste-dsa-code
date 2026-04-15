@@ -1,5 +1,8 @@
 // ===============================
 // Question 1: Sum of Digits
+
+import ts = require("typescript");
+
 // ===============================
 let totalSumOfDigits = 0;
 
@@ -86,31 +89,39 @@ console.log(`Total digits in ${n4}: ${countDigits(n4)}`);
 
 
 // ===============================
-// Question 5: Find Factorial
+// Question 5: Is Araay Sorted
 // ===============================
-/*
-function findFactorial(num: number){
 
+function isArraySorted(nums: number[], curIdx: number = 0){
+    if(nums.length == curIdx){
+        return true;
+    }else{
+        if(nums[curIdx]! > nums[curIdx + 1]!){
+            return false;
+        }
+        curIdx++;
+       return isArraySorted(nums, curIdx);
+    }
 }
 
-const n5 = 5;
-console.log(`Factorial of ${n5} is: ${findFactorial(n5)}`);
-*/
+const nums5 = [1, 2, 3, 4, 5];
+console.log(`Check if the array of ${nums5} is sorted: ${ isArraySorted(nums5)}`);
+
 
 
 
 
 // ===============================
-// Question 6: Check Prime Number
+// Question 6: All Indices Of Array
 // ===============================
-/*
-function isPrime(num: number){
+
+function findIndices(num: number){
 
 }
 
 const n6 = 7;
-console.log(`Is ${n6} a prime number? ${isPrime(n6)}`);
-*/
+console.log(`Is ${n6} a prime number? ${findIndices(n6)}`);
+
 
 
 
