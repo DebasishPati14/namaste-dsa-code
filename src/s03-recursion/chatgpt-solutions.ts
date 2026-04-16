@@ -106,9 +106,9 @@ function isArraySorted(nums: number[], curIdx: number = 0) {
 }
 
 const nums5 = [1, 2, 3, 4, 5];
-console.log(
-  `Check if the array of ${nums5} is sorted: ${isArraySorted(nums5)}`,
-);
+//console.log(
+//  `Check if the array of ${nums5} is sorted: ${isArraySorted(nums5)}`,
+//);
 
 // ===============================
 // Question 6: All Indices Of Array
@@ -133,19 +133,28 @@ function findIndices(
 
 const num6 = [1, 2, 3, 2, 4, 2];
 const n6 = 2;
-console.log(`Is ${num6} a prime number? [${findIndices(num6, n6)}]`);
+//console.log(`Is ${num6} a prime number? [${findIndices(num6, n6)}]`);
 
 // ===============================
-// Question 7: Fibonacci (nth term)
+// Question 7: All Possible Substrings
 // ===============================
-/*
-function fibonacci(num: number){
 
+function findAllSubstrings(orgStr: string, subStr: string[] = [''], curIdx: number = 0){
+     console.log({subStr})
+    if(curIdx == orgStr.length){
+        return subStr;
+    }else {
+        subStr.forEach( strvalue => {
+            subStr.push(strvalue + orgStr.charAt(curIdx));
+        });
+        curIdx++;
+        return findAllSubstrings(orgStr, subStr, curIdx);
+    }
 }
 
-const n7 = 6;
-console.log(`Fibonacci term at position ${n7}: ${fibonacci(n7)}`);
-*/
+const str7 = "abc";
+console.log(`Fibonacci term at position ${str7}: ${findAllSubstrings(str7)}`);
+
 
 // ===============================
 // Question 8: Find Largest Digit
