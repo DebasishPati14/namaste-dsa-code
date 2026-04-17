@@ -136,10 +136,10 @@ const n6 = 2;
 //console.log(`Is ${num6} a prime number? [${findIndices(num6, n6)}]`);
 
 // ===============================
-// Question 7: All Possible Substrings
+// Question 7: All Possible Subsequences
 // ===============================
 
-function findAllSubstrings(orgStr: string, subStr: string[] = [''], curIdx: number = 0){
+function findAllSubsequences(orgStr: string, subStr: string[] = [''], curIdx: number = 0){
      console.log({subStr})
     if(curIdx == orgStr.length){
         return subStr;
@@ -148,12 +148,24 @@ function findAllSubstrings(orgStr: string, subStr: string[] = [''], curIdx: numb
             subStr.push(strvalue + orgStr.charAt(curIdx));
         });
         curIdx++;
-        return findAllSubstrings(orgStr, subStr, curIdx);
+        return findAllSubsequences(orgStr, subStr, curIdx);
     }
 }
 
+function originalSolutionAllSubsequences(orgStr: string, subStr: string = ''): void {
+    if(orgStr == ''){
+        console.log(`'${subStr}'`);
+        return;
+    }
+    const curChar = orgStr.charAt(0);
+    orgStr = orgStr.substr(1);
+    originalSolutionAllSubsequences(orgStr, subStr + '');
+    originalSolutionAllSubsequences(orgStr, subStr + curChar);
+}
+
 const str7 = "abc";
-console.log(`Fibonacci term at position ${str7}: ${findAllSubstrings(str7)}`);
+console.log(`Fibonacci term at position ${str7}: ${findAllSubsequences(str7)}`);
+originalSolutionAllSubsequences(str7);
 
 
 // ===============================
