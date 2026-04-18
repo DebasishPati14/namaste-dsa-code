@@ -164,8 +164,8 @@ function originalSolutionAllSubsequences(orgStr: string, subStr: string = ''): v
 }
 
 const str7 = "abc";
-console.log(`Fibonacci term at position ${str7}: ${findAllSubsequences(str7)}`);
-originalSolutionAllSubsequences(str7);
+//console.log(`Fibonacci term at position ${str7}: ${findAllSubsequences(str7)}`);
+//originalSolutionAllSubsequences(str7);
 
 
 // ===============================
@@ -181,16 +181,26 @@ console.log(`Largest digit in ${n8}: ${findLargestDigit(n8)}`);
 */
 
 // ===============================
-// Question 9: Sum of First N Natural Numbers
+// Question 9: All Subsets Array
 // ===============================
-/*
-function sumOfNaturalNumbers(num: number){
 
+const results9:number[][] = [];
+function getAllSubsetsArry(nums: number[], separateSum: number[])  {
+    if(nums.length == 0){
+        results9.push(separateSum);
+        return;
+    }
+    const curNum = nums[0]!;
+    const restNums = nums.slice(1);
+    getAllSubsetsArry(restNums, [...separateSum, curNum]);
+    getAllSubsetsArry(restNums, separateSum);
 }
 
-const n9 = 10;
-console.log(`Sum of first ${n9} natural numbers: ${sumOfNaturalNumbers(n9)}`);
-*/
+const nums9 = [1, 2, 3];
+//getAllSubsetsArry(nums9, []);
+//results9.forEach( ele => console.log(ele) )
+//console.log(`Sum of first ${nums9} natural numbers: ${ results9 }`);
+
 
 // ===============================
 // Question 10: Check Armstrong Number
