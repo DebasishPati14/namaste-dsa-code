@@ -169,16 +169,34 @@ const str7 = "abc";
 
 
 // ===============================
-// Question 8: Find Largest Digit
+// Question 8: Find Subsequence Sum K
 // ===============================
-/*
-function findLargestDigit(num: number){
+const nums8 = [1, 2, 1];
+const result8: number[][] = [];
+const target8 = 2;
 
+function findSubSequenceSum(curArr: number[], fallbackArr: number[], curSum: number){
+  if(curSum == target8){
+    result8.push(fallbackArr);
+    return;
+  }
+  else if(curSum > target8 || curArr.length == 0){
+    return;
+  }
+
+  const curNum = curArr[0]!;
+  const restArr = curArr.slice(1);
+
+  findSubSequenceSum(restArr, fallbackArr, curSum);
+  findSubSequenceSum(restArr, [...fallbackArr, curNum], curSum + curNum);
 }
 
-const n8 = 93847;
-console.log(`Largest digit in ${n8}: ${findLargestDigit(n8)}`);
-*/
+findSubSequenceSum(nums8, [], 0);
+
+result8.forEach(ele => {
+  console.log( {ele} );
+})
+
 
 // ===============================
 // Question 9: All Subsets Array
