@@ -25,13 +25,9 @@ function binarySearch(
   lowIdx: number = 0,
   highIdx: number = nums.length - 1,
 ) {
-  if (nums[lowIdx]! === target || nums[highIdx]! === target) {
-    console.log({ idx: nums[lowIdx]! === target ? lowIdx : highIdx });
-    return;
-  }
   const mid = Math.ceil((lowIdx + highIdx) / 2);
   console.log({ lowIdx, highIdx, mid });
-  if (lowIdx == mid || highIdx == mid) {
+  if (lowIdx > highIdx) {
     console.log({ idx: -1 });
     return;
   }
@@ -39,12 +35,12 @@ function binarySearch(
     console.log({ idx: mid });
     return;
   } else if (nums[mid]! < target) {
-    binarySearch(nums, target, mid, highIdx);
+    binarySearch(nums, target, mid + 1, highIdx);
   } else {
-    binarySearch(nums, target, lowIdx, mid);
+    binarySearch(nums, target, lowIdx, mid - 1);
   }
 }
 
 const nums2 = [1, 2, 3, 4, 5, 6, 7];
-const n2 = 6;
+const n2 = 8;
 binarySearch(nums2, n2);
