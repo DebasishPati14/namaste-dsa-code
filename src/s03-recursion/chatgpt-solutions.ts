@@ -176,12 +176,11 @@ const result8: number[][] = [];
 const target8 = 2;
 
 function findSubSequenceSum(curArr: number[], fallbackArr: number[], curSum: number){
-  if(curSum == target8){
-    result8.push(fallbackArr);
-    return;
-  }
-  else if(curSum > target8 || curArr.length == 0){
-    return;
+   if(curArr.length == 0){
+       if(curSum === target8){
+           result8.push(fallbackArr);
+        }
+       return;
   }
 
   const curNum = curArr[0]!;
@@ -221,13 +220,13 @@ const nums9 = [1, 2, 3];
 
 
 // ===============================
-// Question 10: Check Armstrong Number
+// Question 10: Get All Permutations
 // ===============================
-/*
+
 function isArmstrong(num: number){
 
 }
 
 const n10 = 153;
 console.log(`Is ${n10} an Armstrong number? ${isArmstrong(n10)}`);
-*/
+
