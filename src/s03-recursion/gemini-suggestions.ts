@@ -25,22 +25,55 @@ function binarySearch(
   lowIdx: number = 0,
   highIdx: number = nums.length - 1,
 ) {
+  if (lowIdx > highIdx) {
+    return -1;
+  }
   const mid = Math.ceil((lowIdx + highIdx) / 2);
   console.log({ lowIdx, highIdx, mid });
-  if (lowIdx > highIdx) {
-    console.log({ idx: -1 });
-    return;
-  }
   if (nums[mid]! === target) {
-    console.log({ idx: mid });
-    return;
+    return mid;
   } else if (nums[mid]! < target) {
-    binarySearch(nums, target, mid + 1, highIdx);
+    return binarySearch(nums, target, mid + 1, highIdx);
   } else {
-    binarySearch(nums, target, lowIdx, mid - 1);
+    return binarySearch(nums, target, lowIdx, mid - 1);
   }
 }
 
 const nums2 = [1, 2, 3, 4, 5, 6, 7];
-const n2 = 8;
-binarySearch(nums2, n2);
+const n2 = 5;
+console.log(
+  `The index of ${n2} in the array ${nums2}: is: ${binarySearch(nums2, n2)}`,
+);
+
+// ===========================
+// QUESTION: 3 Climbing Stairs
+// ===========================
+const results3: number[][] = [];
+let totalComb = 0;
+function climbingStairs(
+  totalStairs: number,
+  currentPath: number[],
+  step?: 1 | 2,
+) {
+  console.log({ results3 });
+  if (totalStairs == 0) {
+    totalComb++;
+    results3.push(currentPath);
+    return;
+  }
+  if (totalStairs < 0) {
+    return;
+  }
+  const step2 = totalStairs - 2;
+  const step1 = totalStairs - 1;
+  climbingStairs(step2, [...currentPath, 2], 2);
+
+  climbingStairs(step1, [...currentPath, 1], 1);
+}
+
+const n3 = 5;
+climbingStairs(n3, []);
+results3.forEach((ele) => {
+  console.log(ele);
+});
+console.log(`The index of ${n3}  is: ${totalComb}`);
