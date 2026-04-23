@@ -44,3 +44,26 @@ function binarySearch(
 const nums2 = [1, 2, 3, 4, 5, 6, 7];
 const n2 = 8;
 binarySearch(nums2, n2);
+
+// =============================
+// QUESTION: 4  Pow(x, n)
+// =============================
+function powerX(x: number, n: number): number {
+  console.log({ x, n });
+  if (n == 0) {
+    return 1;
+  }
+  let res = 1;
+  if (n > 0) {
+    n = n - 1;
+    res = powerX(x, n) * x;
+  } else {
+    n = n + 1;
+    res = powerX(x, n) / x;
+  }
+  return res;
+}
+
+const num4 = 2;
+const pow4 = -2;
+console.log(`The value of ${num4} power 2 is: ${powerX(num4, pow4)}`);
