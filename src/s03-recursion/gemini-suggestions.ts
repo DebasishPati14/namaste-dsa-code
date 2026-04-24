@@ -50,11 +50,7 @@ console.log(
 // ===========================
 const results3: number[][] = [];
 let totalComb = 0;
-function climbingStairs(
-  totalStairs: number,
-  currentPath: number[],
-  step?: 1 | 2,
-) {
+function climbingStairs(totalStairs: number, currentPath: number[]) {
   console.log({ results3 });
   if (totalStairs == 0) {
     totalComb++;
@@ -98,5 +94,30 @@ function powerX(x: number, n: number): number {
 }
 
 const num4 = 2;
-const pow4 = -2;
+const pow4 = -2; //always be integer
 console.log(`The value of ${num4} power 2 is: ${powerX(num4, pow4)}`);
+
+// =============================
+// QUESTION: 5  K-th Symbol Grammar
+// =============================
+
+function getKthSymbol(num: number, idx: number, res: string = '0') {
+  console.log({ res });
+  if (num === 1) {
+    return res.charAt(idx) || '0';
+  }
+  num = num - 1;
+  let resultStr = '';
+  for (let i = 0; i < res.length; i++) {
+    if (res.charAt(i) === '0') {
+      resultStr += '01';
+    } else {
+      resultStr += '10';
+    }
+  }
+  return getKthSymbol(num, idx, resultStr);
+}
+
+const n = 1,
+  k = 1;
+console.log(`The value of ${n}th row in table is: ${getKthSymbol(n, k, '0')}`);
