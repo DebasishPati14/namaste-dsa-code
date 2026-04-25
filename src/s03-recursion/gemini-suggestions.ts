@@ -103,6 +103,8 @@ console.log(`The value of ${num4} power 2 is: ${powerX(num4, pow4)}`);
 
 function getKthSymbol(num: number, idx: number, res: string = '0') {
   console.log({ res });
+  // Key things to remember is that first half of the string is inverse of the
+  // second half so res can store only half string
   if (num === 1) {
     return res.charAt(idx) || '0';
   }
