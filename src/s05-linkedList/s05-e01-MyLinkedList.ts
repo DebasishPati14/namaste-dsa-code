@@ -1,27 +1,37 @@
-function MyNode(val: number) {
-  this.value = val;
-  this.next = null;
+class MyNode {
+  value: number;
+  next: MyNode | null = null;
+
+  constructor(val: number) {
+    this.value = val;
+  }
 }
 
 class MyLinkedList {
-  head: typeof MyNode | null = null;
-  size = 0;
-  tail: typeof MyNode | null = null;
+  head: MyNode | null;
+  size: number;
+  tail: MyNode | null;
+
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+  }
 
   get(index: number): number {
-    if (index > this.size - 1) {
-      return 0;
+    if (index < 0 || index > this.size - 1) {
+      return NaN;
     }
 
-    let curNode: typeof MyNode | null = this.head;
+    let curNode: MyNode = this.head!;
 
     for (let i = 0; i < this.size; i++) {
       if (i == index) {
-        return curNode ? curNode.value! : 0;
+        return curNode ? curNode.value! : NaN;
       }
-      curNode = curNode.next;
+      curNode = curNode.next!;
     }
-    return 0;
+    return NaN;
   }
 
   addAtHead(val: number): void {
@@ -39,49 +49,71 @@ class MyLinkedList {
     if (this.size == 0) {
       this.tail = myNode;
       this.head = myNode;
+    } else {
+      this.tail!.next = myNode;
+      this.tail = myNode;
     }
-    this.tail.next = myNode;
-    this.tail = myNode;
     this.size = this.size + 1;
   }
 
-  addAtIndex(index: number, val: number) {
-    if (index > this.size - 1) {
-      return 0;
+  addAtIndex(index: number, val: number): void {
+    if (index == 0) {
+      this.addAtHead(val);
+      return;
+    } else if (index < 0 || index > this.size + 1) {
+      return;
+    } else if (index == this.size) {
+      this.addAtTail(val);
+      return;
     }
 
-    let curNode: typeof MyNode | null = this.head;
+    let curNode: MyNode = this.head!;
 
     for (let i = 0; i < this.size; i++) {
       if (i + 1 == index) {
         const myNode = new MyNode(val);
         myNode.next = curNode.next;
         curNode.next = myNode;
+        break;
       }
-      curNode = curNode.next;
+      curNode = curNode.next!;
     }
 
     this.size = this.size + 1;
   }
 
-  deleteAtIndex(index: number) {
-    if (index > this.size - 1) {
-      return 0;
+  deleteAtIndex(index: number): void {
+    if (index < 0 || index > this.size - 1) {
+      return;
+    }
+    if (index == 0) {
+      this.head = this.head!.next;
+      if (this.size == 1) {
+        this.tail = null;
+      }
+      this.size = this.size - 1;
+      return;
     }
 
-    let curNode: typeof MyNode | null = this.head;
+    let curNode: MyNode = this.head!;
 
     for (let i = 0; i < this.size; i++) {
       if (i + 1 == index) {
-        curNode.next = curNode.next.next;
+        curNode.next = curNode.next!.next;
+        if (index == this.size - 1) {
+          this.tail = curNode;
+        }
+        break;
       }
-      curNode = curNode.next;
+      curNode = curNode.next!;
     }
-    return 0;
+    this.size = this.size - 1;
   }
 }
+
 const myLinkedList = new MyLinkedList();
 myLinkedList.addAtHead(1);
+
 console.log({ head: myLinkedList.head, siz: myLinkedList.size });
 myLinkedList.addAtTail(5);
 myLinkedList.addAtTail(6);
@@ -96,3 +128,9 @@ console.log({
   at4: myLinkedList.get(3),
   siz: myLinkedList.size,
 });
+
+console.log('SIZE: ', myLinkedList.size);
+
+for (let i = 0; i < myLinkedList.size; i++) {
+  console.log('idx: ', i, myLinkedList.get(i));
+}
