@@ -168,8 +168,28 @@ function hasCycle(head: MyNode): boolean {
   return false;
 }
 
+function hasCycleFloyeds(headNode: MyNode): boolean {
+  let slowTraverseNode: MyNode | null = headNode;
+  let fastTraverseNode: MyNode | null = headNode;
+  let isCyclic = false;
+
+  while (fastTraverseNode != null || slowTraverseNode == null) {
+    if (fastTraverseNode == slowTraverseNode) {
+      isCyclic = true;
+      break;
+    }
+
+    slowTraverseNode = slowTraverseNode!.next;
+    fastTraverseNode = fastTraverseNode!.next?.next || null;
+  }
+  return isCyclic;
+}
+
 for (let i = 0; i < myLinkedList.size; i++) {
   console.log('idx: ', i, myLinkedList.getAtIndex(i));
 }
 
-console.log({ hasCycle: hasCycle(myLinkedList.head!) });
+console.log({
+  hasCycle: hasCycle(myLinkedList.head!),
+  isCyclic: hasCycleFloyeds(myLinkedList.head!),
+});
