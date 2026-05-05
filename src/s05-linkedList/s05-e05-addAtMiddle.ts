@@ -1,12 +1,47 @@
-class MyNode {
+export class MyNode {
   value: number | null = null;
   next: MyNode | null = null;
 }
-
-class MyLinkedList {
+export class MyLinkedList {
   head: MyNode | null = null;
   tail: MyNode | null = null;
   size: number = 0;
+  public reverseLinkedList(): void {
+    let newHead = this.tail;
+
+    for (let j = this.size - 2; j >= 0; j--) {
+      let currentNode = this.head;
+      for (let i = 0; i < this.size; i++) {
+        if (j == i) {
+          newHead!.next = currentNode!.next;
+        }
+        if (j == 0) {
+          this.tail = currentNode;
+        }
+        currentNode = currentNode!.next;
+      }
+      console.log({ j });
+      newHead = newHead!.next;
+    }
+    this.head = newHead;
+  }
+
+  public getAtIndex(idx: number): number | null {
+    let resultVal: number | null = null;
+    if (idx < 0 || idx >= this.size) {
+      console.error('Invalid idx provided');
+    } else {
+      let tempNode = this.head;
+      for (let i = 0; i < this.size; i++) {
+        if (i == idx) {
+          resultVal = tempNode!.value;
+          break;
+        }
+        tempNode = tempNode!.next;
+      }
+    }
+    return resultVal;
+  }
 
   public addAtHead(val: number): void {
     const newNode = new MyNode();
@@ -118,6 +153,7 @@ myLinkedList.addAtIndex(5, 3);
 myLinkedList.addAtTail(6);
 myLinkedList.addAtMiddle(4);
 
+myLinkedList.reverseLinkedList();
 for (let i = 0; i < myLinkedList.size; i++) {
-  console.log('idx: ', i, myLinkedList.get(i));
+  console.log('idx: ', i, myLinkedList.getAtIndex(i));
 }

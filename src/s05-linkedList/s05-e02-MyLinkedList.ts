@@ -7,7 +7,7 @@ class MyNode {
   }
 }
 
-class MyLinkedList {
+export class MyLinkedList {
   head: MyNode | null;
   size: number;
   tail: MyNode | null;
