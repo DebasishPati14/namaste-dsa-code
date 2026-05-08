@@ -13,6 +13,7 @@ MyLinkedList.prototype.reverseLinkedList = function (): void {
   while (currNode != null) {
     console.log(prevNode, currNode);
     const tempNode = currNode.next;
+    //  assignment orders matters
     currNode.next = prevNode;
     prevNode = currNode;
     currNode = tempNode;

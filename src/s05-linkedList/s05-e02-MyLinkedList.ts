@@ -109,6 +109,21 @@ export class MyLinkedList {
     }
     this.size = this.size - 1;
   }
+
+  reverseLinkedList1(head: MyNode | null): void {
+    let prevNode = null;
+    let currNode: MyNode | null = head!;
+
+    while (currNode != null) {
+      console.log({ currNode });
+      const tempNode: MyNode | null = currNode.next;
+      currNode.next = prevNode;
+
+      prevNode = currNode;
+      currNode = tempNode;
+    }
+    this.head = prevNode;
+  }
 }
 
 const myLinkedList = new MyLinkedList();
@@ -130,6 +145,13 @@ console.log({
 });
 
 console.log('SIZE: ', myLinkedList.size);
+
+for (let i = 0; i < myLinkedList.size; i++) {
+  console.log('idx: ', i, myLinkedList.get(i));
+}
+
+myLinkedList.reverseLinkedList1(myLinkedList.head);
+console.log('REVERSE', myLinkedList.size);
 
 for (let i = 0; i < myLinkedList.size; i++) {
   console.log('idx: ', i, myLinkedList.get(i));
