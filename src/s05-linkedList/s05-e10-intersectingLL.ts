@@ -134,7 +134,8 @@ function printList(list: MyLinkedList, label: string): void {
    B: 4 -> 5 ----^
 ========================================================= */
 
-function createIntersectingListsMethod1(): {
+/*
+function createIntersectingListsMethod(): {
   listA: MyLinkedList;
   listB: MyLinkedList;
 } {
@@ -160,6 +161,7 @@ function createIntersectingListsMethod1(): {
 
   return { listA, listB };
 }
+*/
 
 /* =========================================================
    METHOD 2
@@ -167,31 +169,33 @@ function createIntersectingListsMethod1(): {
    B: 99 --------------^
 ========================================================= */
 
-// function createIntersectingListsMethod2(): {
-//   listA: MyLinkedList;
-//   listB: MyLinkedList;
-// } {
-//   const listA = new MyLinkedList();
+/*
+function createIntersectingListsMethod(): {
+  listA: MyLinkedList;
+  listB: MyLinkedList;
+} {
+  const listA = new MyLinkedList();
 
-//   listA.addAtTail(10);
-//   listA.addAtTail(20);
+  listA.addAtTail(10);
+  listA.addAtTail(20);
 
-//   const intersect1 = new MyNode(30);
-//   const intersect2 = new MyNode(40);
+  const intersect1 = new MyNode(30);
+  const intersect2 = new MyNode(40);
 
-//   intersect1.next = intersect2;
+  intersect1.next = intersect2;
 
-//   listA.tail!.next = intersect1;
-//   listA.tail = intersect2;
+  listA.tail!.next = intersect1;
+  listA.tail = intersect2;
 
-//   const listB = new MyLinkedList();
-//   listB.addAtTail(99);
+  const listB = new MyLinkedList();
+  listB.addAtTail(99);
 
-//   listB.tail!.next = intersect1;
-//   listB.tail = intersect2;
+  listB.tail!.next = intersect1;
+  listB.tail = intersect2;
 
-//   return { listA, listB };
-// }
+  return { listA, listB };
+}
+*/
 
 /* =========================================================
    METHOD 3
@@ -199,42 +203,38 @@ function createIntersectingListsMethod1(): {
    B: 1 -> 2 -> 3 -----------^
 ========================================================= */
 
-// function createIntersectingListsMethod3(): {
-//   listA: MyLinkedList;
-//   listB: MyLinkedList;
-// } {
-//   const listA = new MyLinkedList();
+function createIntersectingListsMethod(): {
+  listA: MyLinkedList;
+  listB: MyLinkedList;
+} {
+  const listA = new MyLinkedList();
 
-//   listA.addAtTail(7);
-//   listA.addAtTail(14);
+  listA.addAtTail(7);
+  listA.addAtTail(14);
 
-//   const intersect1 = new MyNode(21);
-//   const intersect2 = new MyNode(28);
-//   const intersect3 = new MyNode(35);
+  const intersect1 = new MyNode(21);
+  const intersect2 = new MyNode(28);
+  const intersect3 = new MyNode(35);
 
-//   intersect1.next = intersect2;
-//   intersect2.next = intersect3;
+  intersect1.next = intersect2;
+  intersect2.next = intersect3;
 
-//   listA.tail!.next = intersect1;
-//   listA.tail = intersect3;
+  listA.tail!.next = intersect1;
+  listA.tail = intersect3;
 
-//   const listB = new MyLinkedList();
+  const listB = new MyLinkedList();
 
-//   listB.addAtTail(1);
-//   listB.addAtTail(2);
-//   listB.addAtTail(3);
+  listB.addAtTail(1);
+  listB.addAtTail(2);
+  listB.addAtTail(3);
 
-//   listB.tail!.next = intersect1;
-//   listB.tail = intersect3;
+  listB.tail!.next = intersect1;
+  listB.tail = intersect3;
 
-//   return { listA, listB };
-// }
+  return { listA, listB };
+}
 
-/* =========================================================
-   USE ONLY ONE METHOD AT A TIME
-========================================================= */
-
-const { listA, listB } = createIntersectingListsMethod1();
+const { listA, listB } = createIntersectingListsMethod();
 // const { listA, listB } = createIntersectingListsMethod2();
 // const { listA, listB } = createIntersectingListsMethod3();
 
@@ -242,39 +242,33 @@ printList(listA, 'List A:');
 printList(listB, 'List B:');
 
 function verifyIntersect(head1: MyNode, head2: MyNode) {
-  // reverse Boththe list
-  const revHead1 = reverseLL(head1);
-  const revHead2 = reverseLL(head2); // because of both point to same point reversal is waste of effort
+  const list1Set = new Set<MyNode>();
+  let traverseNode: MyNode | null = head1;
+  let doesIntersect = false;
 
-  let list1 = revHead1;
-  let list2 = revHead2;
-
-  while (list1 != null && list2 != null) {
-    if (list1 != list2) {
+  while (traverseNode != null) {
+    list1Set.add(traverseNode);
+    traverseNode = traverseNode.next;
+  }
+  traverseNode = head2;
+  while (traverseNode != null) {
+    if (list1Set.has(traverseNode)) {
+      doesIntersect = true;
       break;
     }
-    list1 = list1.next;
-    list2 = list2.next;
+    traverseNode = traverseNode.next;
   }
 
-  console.log({ intersectAt1: list1, intersectAt2: list2 });
+  if (doesIntersect) {
+    console.log({
+      intersectAt1: traverseNode,
+      intersectVal: traverseNode?.value,
+    });
+  }
   return;
 }
 
-function reverseLL(head: MyNode) {
-  let prev = null;
-  let curr: MyNode | null = head;
-
-  while (curr != null) {
-    const temp: MyNode | null = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = temp;
-  }
-
-  return prev;
-}
-
+verifyIntersect(listA.head!, listB.head!);
 /*
   Now call your own function here.
 
