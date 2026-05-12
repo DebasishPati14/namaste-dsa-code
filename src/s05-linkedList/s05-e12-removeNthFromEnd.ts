@@ -1,24 +1,27 @@
-import { MyLinkedList, MyNode } from './s05-e03-exportBaseClass.ts';
+import { MyNode, MyLinkedList } from './s05-e03-exportBaseClass.ts';
 
-const removeNthEndElements = function (head: MyNode, nthIdx: number): number {
-  let currNode: MyNode | null = reverseLL(head);
-  let curAt = 1;
+const removeNthEndElements = function (head: MyNode, nthIdx: number): void {
+  const currHead: MyNode | null = reverseLL(head);
+  let currNode = currHead;
+  let curAt = 0;
 
-  while (currNode != null) {
+  while (currNode != null && currNode.next != null) {
+    console.table({ val: currNode.value });
     if (curAt == nthIdx - 1) {
-      currNode = currNode.next!.next;
+      currNode.next = currNode.next!.next;
       break;
+    } else {
+      currNode = currNode!.next;
     }
-    currNode = currNode!.next;
     curAt++;
   }
 
-  return currNode!.value || NaN;
+  reverseLL(currHead!);
 };
 
 export function reverseLL(head: MyNode) {
   let currNode: MyNode | null = head;
-  let prevNode: MyNode | null = head;
+  let prevNode: MyNode | null = null;
 
   while (currNode != null) {
     const temp: MyNode | null = currNode.next;
@@ -30,13 +33,15 @@ export function reverseLL(head: MyNode) {
   return prevNode;
 }
 
-export function printList(list: MyLinkedList, label: string = ''): void {
-  let cur = list.head;
+export function printList(head: MyNode, label: string = ''): void {
+  let cur: MyNode | null = head;
   const arr: number[] = [];
+  let maxLen = 20;
 
-  while (cur) {
-    arr.push(cur.value ?? NaN);
-    cur = cur.next;
+  while (cur != null && maxLen > 10) {
+    arr.push(cur!.value ?? NaN);
+    cur = cur!.next;
+    maxLen--;
   }
 
   console.log(label, arr.join(' -> '));
@@ -49,8 +54,8 @@ myLinkedList.addAtIndex(2, 3);
 myLinkedList.addAtIndex(3, 4);
 myLinkedList.addAtTail(5);
 
-printList(myLinkedList);
+printList(myLinkedList.head!);
 
-console.log({ afterRemove: removeNthEndElements(myLinkedList.head!, 2) });
+removeNthEndElements(myLinkedList.head!, 2);
 
-printList(myLinkedList);
+printList(myLinkedList.head!);
