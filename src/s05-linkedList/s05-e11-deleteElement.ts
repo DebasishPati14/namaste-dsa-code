@@ -1,6 +1,10 @@
 import { MyLinkedList, MyNode } from './s05-e03-exportBaseClass.ts';
+import { printList } from './s05-e12-removeNthFromEnd.ts';
 
-const removeElements = function (head: MyNode, val: number): MyNode | null {
+const removeElementsApproach1 = function (
+  head: MyNode,
+  val: number,
+): MyNode | null {
   let currNode: MyNode | null = head;
   let resNode: MyNode | null = null;
   let newHead = null;
@@ -25,27 +29,36 @@ const removeElements = function (head: MyNode, val: number): MyNode | null {
   return newHead;
 };
 
-function printList(list: MyLinkedList, label: string = ''): void {
-  let cur = list.head;
-  const arr: number[] = [];
+const removeElements = function (head: MyNode, val: number): MyNode | null {
+  const sentinelNode: MyNode = new MyNode(0);
+  sentinelNode.next = head;
+  let prevNode = sentinelNode;
 
-  while (cur) {
-    arr.push(cur.value ?? NaN);
-    cur = cur.next;
+  while (prevNode != null && prevNode.next != null) {
+    if (prevNode.next.value == val) {
+      prevNode.next = prevNode.next.next;
+    } else {
+      prevNode = prevNode.next;
+    }
+    console.log({ val: prevNode.value, sentinelNode });
+    // currNode = currNode.next;
   }
 
-  console.log(label, arr.join(' -> '));
-}
+  return sentinelNode.next;
+};
+
 const myLinkedList = new MyLinkedList();
 
-myLinkedList.addAtHead(1);
+myLinkedList.addAtHead(2);
 myLinkedList.addAtTail(2);
-myLinkedList.addAtIndex(2, 3);
+myLinkedList.addAtIndex(2, 2);
 myLinkedList.addAtIndex(3, 2);
-myLinkedList.addAtTail(1);
+myLinkedList.addAtTail(2);
 
-printList(myLinkedList);
+printList(myLinkedList.head!);
 
-console.log({ afterRemove: removeElements(myLinkedList.head!, 2) });
+const afterRemove1 = removeElementsApproach1(myLinkedList.head!, 2);
+// const afterRemove2 = removeElements(myLinkedList.head!, 2);
 
-printList(myLinkedList);
+// printList(afterRemove!);
+printList(afterRemove1!);
