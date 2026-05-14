@@ -3,7 +3,7 @@ import { MyNode, MyLinkedList } from './s05-e03-exportBaseClass.ts';
 const removeNthEndElements = function (head: MyNode, nthIdx: number): void {
   const currHead: MyNode | null = reverseLL(head);
   let currNode = currHead;
-  let curAt = 0;
+  let curAt = 1;
 
   while (currNode != null && currNode.next != null) {
     console.table({ val: currNode.value });
@@ -33,6 +33,31 @@ export function reverseLL(head: MyNode) {
   return prevNode;
 }
 
+function removeNthEndNode(head: MyNode | null, nthIdx: number) {
+  let traverseNode = head;
+  let lengthOfList = 0;
+
+  while (traverseNode != null) {
+    traverseNode = traverseNode.next;
+    lengthOfList++;
+  }
+
+  const sentinelNode = new MyNode(0);
+  sentinelNode.next = head;
+  const deleteIdx = lengthOfList - nthIdx;
+
+  traverseNode = sentinelNode;
+  for (let i = 0; i < deleteIdx; i++) {
+    if (i == deleteIdx - 1) {
+      traverseNode!.next = traverseNode!.next!.next;
+      break;
+    }
+    traverseNode = traverseNode!.next;
+  }
+
+  return sentinelNode.next;
+}
+
 export function printList(head: MyNode, label: string = ''): void {
   let cur: MyNode | null = head;
   const arr: number[] = [];
@@ -53,9 +78,15 @@ myLinkedList.addAtTail(2);
 myLinkedList.addAtIndex(2, 3);
 myLinkedList.addAtIndex(3, 4);
 myLinkedList.addAtTail(5);
+myLinkedList.addAtTail(6);
+myLinkedList.addAtHead(0);
 
 printList(myLinkedList.head!);
 
 removeNthEndElements(myLinkedList.head!, 2);
 
 printList(myLinkedList.head!);
+
+const newHead = removeNthEndNode(myLinkedList.head!, 2);
+console.log({ newMethod: 'removeNthEndNode By tutorial', newHead });
+printList(newHead!);
