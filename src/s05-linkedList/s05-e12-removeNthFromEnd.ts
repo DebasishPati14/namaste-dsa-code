@@ -73,6 +73,29 @@ export function printList(head: MyNode, label: string = ''): void {
 }
 const myLinkedList = new MyLinkedList();
 
+function removeNthEndEleSinglePass(head: MyNode,nthIdx: number){
+    let firstNode:MyNode | null = head;
+    let secondNode: MyNode;
+
+    for(let i = 0; i < nthIdx && firstNode != null; i++){
+        firstNode = firstNode.next;
+    }
+
+    const sentinelNode = new MyNode(0);
+    sentinelNode.next = head;
+    secondNode = sentinelNode;
+
+    while(firstNode != null && firstNode.next != null){
+        firstNode = firstNode.next;
+        secondNode = secondNode.next!;    
+    }
+
+    secondNode.next = secondNode.next!.next;
+
+    return sentinelNode.next;
+
+}
+
 myLinkedList.addAtHead(1);
 myLinkedList.addAtTail(2);
 myLinkedList.addAtIndex(2, 3);
@@ -83,7 +106,8 @@ myLinkedList.addAtHead(0);
 
 printList(myLinkedList.head!);
 
-removeNthEndElements(myLinkedList.head!, 2);
+removeNthEndEleSinglePass(myLinkedList.head!,2);
+//removeNthEndElements(myLinkedList.head!, 2);
 
 printList(myLinkedList.head!);
 
