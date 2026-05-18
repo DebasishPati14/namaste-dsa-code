@@ -111,4 +111,18 @@ class MyLinkedList {
   }
 }
 
+export function printList(head: MyNode, label: string = ''): void {
+  let cur: MyNode | null = head;
+  const arr: number[] = [];
+  let maxLen = 20;
+
+  while (cur != null && maxLen > 10) {
+    arr.push(cur!.value ?? NaN);
+    cur = cur!.next;
+    maxLen--;
+  }
+
+  console.log(label, arr.join(' -> '));
+}
+
 export { MyLinkedList, MyNode };
