@@ -1,4 +1,4 @@
-import { MyNode, MyLinkedList, printList } from './s05-e03-exportBaseClass.ts';
+import { MyNode, MyLinkedList, printList } from './s05-e03-exportBaseClass.js';
 
 function addTwoLists(head1: MyNode, head2: MyNode): MyNode | null {
   // const sentinel = new MyNode(0);
