@@ -33,6 +33,35 @@ function mergeTwoSortedLists(head1: MyNode, head2: MyNode): MyNode | null {
   return sentinel.next;
 }
 
+function mergeSortedLLOptimized(head1: MyNode, head2: MyNode): MyNode | null {
+  const sentinel = new MyNode(0);
+  let currNode = sentinel;
+
+  let firstNode: MyNode | null = head1;
+  let secondNode: MyNode | null = head2;
+  while (firstNode && secondNode) {
+    if (firstNode.value < secondNode.value) {
+      currNode.next = firstNode;
+      currNode = firstNode;
+      firstNode = firstNode.next;
+    } else {
+      currNode.next = secondNode;
+      currNode = secondNode;
+      secondNode = secondNode.next;
+    }
+  }
+
+  let incompleteNode = firstNode === null ? secondNode : firstNode;
+
+  while (incompleteNode != null) {
+    currNode.next = incompleteNode;
+    currNode = incompleteNode;
+    incompleteNode = incompleteNode.next;
+  }
+
+  return sentinel.next;
+}
+
 const myLinkedList1 = new MyLinkedList();
 const myLinkedList2 = new MyLinkedList();
 
