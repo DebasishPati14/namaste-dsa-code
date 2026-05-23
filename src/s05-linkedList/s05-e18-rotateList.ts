@@ -1,4 +1,4 @@
-import { MyNode, MyLinkedList, printList } from './s05-e03-exportBaseClass.js';
+import { MyNode, MyLinkedList, printList } from './s05-e03-exportBaseClass.ts';
 
 function rotateList(head: MyNode, rotNum: number): MyNode | null {
   // const sentinel = new MyNode(0);
@@ -41,6 +41,36 @@ function rotateList(head: MyNode, rotNum: number): MyNode | null {
   return tempNode === null ? originalHead : newHead;
 }
 
+function rotateListAppr2(head: MyNode, rotNum: number): MyNode | null {
+  let frontNode: MyNode | null = head;
+  let backNode: MyNode | null = head;
+
+  let count = 0;
+
+  while (backNode != null) {
+    backNode = backNode.next;
+    count++;
+  }
+  backNode = frontNode;
+
+  for (let i = 0; i < rotNum % count; i++) {
+    frontNode = frontNode!.next;
+  }
+
+  while (frontNode != null && frontNode.next != null) {
+    console.log({ frontNode, i: 'Itr' });
+    frontNode = frontNode.next;
+    backNode = backNode!.next;
+  }
+
+  console.log({ frontNode });
+  const newHead = backNode!.next;
+  frontNode!.next = head;
+  backNode!.next = null;
+
+  return newHead;
+}
+
 const myLinkedList = new MyLinkedList();
 
 myLinkedList.addAtHead(1);
@@ -52,6 +82,6 @@ myLinkedList.addAtIndex(2, 3);
 
 printList(myLinkedList.head!);
 
-const newHead = rotateList(myLinkedList.head!, 1);
+const newHead = rotateListAppr2(myLinkedList.head!, 6);
 console.log({ newMethod: 'removeNthEndNode By tutorial', newHead });
 printList(newHead!);
