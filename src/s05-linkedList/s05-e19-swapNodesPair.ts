@@ -20,6 +20,29 @@ function swapNodePairs(head: MyNode, rotNum: number): MyNode | null {
   return newHead;
 }
 
+function swapNodePairsOptimized(head: MyNode, rotNum: number): MyNode | null {
+  let currNode: MyNode | null = head;
+  let nextNode: MyNode | null = head.next;
+
+  const sentinel = new MyNode(0);
+  sentinel.next = head;
+  let prevNode: MyNode | null = sentinel;
+
+  while (currNode != null && nextNode != null && nextNode.next != null) {
+    console.log({ prevNode, currNode, nextNode });
+    const temp = nextNode.next;
+
+    prevNode.next = currNode.next;
+    currNode.next = nextNode.next;
+    nextNode.next = currNode;
+
+    prevNode = currNode;
+    currNode = temp;
+    nextNode = temp.next;
+  }
+
+  return sentinel.next;
+}
 const myLinkedList = new MyLinkedList();
 
 myLinkedList.addAtHead(1);
@@ -34,6 +57,6 @@ myLinkedList.addAtTail(7);
 
 printList(myLinkedList.head!);
 
-const newHead = swapNodePairs(myLinkedList.head!, 6);
+const newHead = swapNodePairsOptimized(myLinkedList.head!, 6);
 console.log({ newMethod: 'removeNthEndNode By tutorial', newHead });
 printList(newHead!);
