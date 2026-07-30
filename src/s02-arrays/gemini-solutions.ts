@@ -92,83 +92,196 @@ function sortColors(nums: number[]): number[] {
 }
 
 const numArr4 = [2, 0, 2, 1, 1, 0];
-console.log(`Sorted colors array: ${sortColors(numArr4)}`);
+//console.log(`Sorted colors array: ${sortColors(numArr4)}`);
 
 // QUESTION 5 ------ Product of Array Except Self
-/*
+
 function productExceptSelf(nums: number[]): number[] {
-  // TODO: Implement
-  return [];
+  const result: number[] = [];
+  let rightProd = 1;
+  for (let i = 0; i < nums.length; i++) {
+    result[i]! = 1;
+  }
+
+  for (let i = 1; i < nums.length; i++) {
+    result[i]! = nums[i - 1]! * result[i - 1]!;
+    //   result[j]! = nums[j + 1]! * result[j + 1 ]!;
+    console.log({ iV: nums[i - 1]! * result[i - 1]!, i });
+    console.log({ result });
+  }
+
+  for (let j = nums.length - 2; j >= 0; j--) {
+    rightProd *= nums[j + 1]!;
+    result[j]! *= rightProd;
+    console.log({ jV: nums[j + 1]! * result[j + 1]!, j });
+    console.log({ result });
+  }
+  return result;
 }
 
 const numArr5 = [1, 2, 3, 4];
-console.log(
-  `Product except self for [${numArr5}] is ${productExceptSelf(numArr5)}`
-);
-*/
+//console.log(
+//  `Product except self for [${numArr5}] is ${productExceptSelf(numArr5)}`
+//);
 
 // QUESTION 6 ------ Find Numbers Disappeared in an Array
-/*
+
 function findDisappearedNumbers(nums: number[]): number[] {
-  // TODO: Implement
-  return [];
+  const result: number[] = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    const index = Math.abs(nums[i]!) - 1;
+
+    if (index < nums.length && nums[index]! > 0) {
+      nums[index]! = -nums[index]!;
+    }
+
+    console.log({ i, nums: nums[i]! });
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i]! > 0) {
+      result.push(i + 1);
+    }
+  }
+  return result;
 }
 
 const numArr6 = [4, 3, 2, 7, 8, 2, 3, 1];
-console.log(
-  `Missing numbers in [${numArr6}] are ${findDisappearedNumbers(numArr6)}`
-);
-*/
+// console.log(
+//   `Missing numbers in [${numArr6}] are ${findDisappearedNumbers(numArr6)}`
+// );
 
 // QUESTION 7 ------ Minimum Size Subarray Sum
-/*
-function minSubArrayLen(target: number, nums: number[]): number {
-  // TODO: Implement
-  return 0;
+function findMinSubArrayLen(target: number, nums: number[]): number {
+  let leftPointer = 0;
+  let rightPointer = 0;
+  let minSubArr = 0;
+  let currentSum = nums[0]!;
+
+  while(leftPointer < nums.length){
+    if(currentSum < target && rightPointer < nums.length - 1) {
+      rightPointer++;
+      currentSum += nums[rightPointer]!;
+    }else if(currentSum >= target){
+      if(minSubArr == 0 || minSubArr > (rightPointer - leftPointer)){
+        minSubArr = rightPointer - leftPointer + 1;
+      }
+      currentSum -= nums[leftPointer]!;
+      leftPointer++;
+    } else {
+      currentSum -= nums[leftPointer]!;
+      leftPointer++;
+    }
+    console.log({leftPointer, rightPointer, currentSum})
+  }
+
+
+  return minSubArr;
 }
 
-const numArr7 = [2, 3, 1, 2, 4, 3];
-const target7 = 7;
-console.log(
-  `Minimum subarray length for target ${target7} in [${numArr7}] is ${minSubArrayLen(target7, numArr7)}`
-);
-*/
+
+function findMinSubArrayLenOptimal(target: number, nums: number[]): number {
+  let lPointer = 0;
+  let minSubArr = Infinity;
+  let currentSum = 0; // will add inside loop so not [0] value
+
+  for (let rPointer = 0; rPointer < nums.length; rPointer++) {
+    currentSum += nums[rPointer]!;
+
+    while(currentSum >= target){
+      minSubArr = Math.min((rPointer - lPointer) + 1, minSubArr);
+      currentSum = currentSum - nums[lPointer]!;
+      lPointer++;
+    }
+
+    console.log({lPointer, rPointer, currentSum})
+  }
+  return minSubArr === Infinity ? 0 : minSubArr;
+}
+
+const numArr7 = [6, 4, 1, 7, 3, 6, 1]; // [2, 3, 1, 2, 4, 3];
+const target7 = 10;
+//console.log(
+//    `Minimum subarray length for target ${target7} in [${numArr7}] is ${findMinSubArrayLen(target7, numArr7)}\nalso from Optiomal${findMinSubArrayLenOptimal(target7, numArr7)}`
+//);
+
 
 // QUESTION 8 ------ Third Maximum Number
-/*
+
 function thirdMax(nums: number[]): number {
-  // TODO: Implement
-  return 0;
+  let fMax: number | null = null;
+  let sMax: number | null = null;
+  let tMax: number | null = null;
+
+  for (const eachNum of nums) {
+    if (fMax == eachNum || sMax == eachNum || tMax === eachNum) {
+      continue;
+    } else if (fMax == null || eachNum > fMax) {
+      tMax = sMax;
+      sMax = fMax;
+      fMax = eachNum;
+    } else if (sMax == null || eachNum > sMax) {
+      tMax = sMax;
+      sMax = eachNum;
+    } else if (tMax == null || eachNum > tMax) {
+      tMax = eachNum;
+    }
+  }
+
+  return tMax == null ? fMax! : tMax!;
 }
 
 const numArr8 = [2, 2, 3, 1];
-console.log(
-  `Third maximum number in [${numArr8}] is ${thirdMax(numArr8)}`
-);
-*/
+//console.log(`Third maximum number in [${numArr8}] is ${thirdMax(numArr8)}`);
 
 // QUESTION 9 ------ Container With Most Water
-/*
-function maxArea(height: number[]): number {
-  // TODO: Implement
-  return 0;
+
+function findMaxArea(height: number[]): number {
+  let currentArea = 0;
+  let maxArea = 0;
+  let lPointer = 0;
+  let rPointer = height.length - 1;
+
+  while(rPointer > lPointer){
+      const w = rPointer - lPointer; // width between 2 pointers
+      const h = Math.min(height[lPointer]!, height[rPointer]!); // height which wold be the lowest is considered
+      currentArea = h * w; // height * width or rectangle
+      maxArea = Math.max(currentArea, maxArea);
+      
+      if(height[lPointer]! <= height[rPointer]!){          
+          lPointer++;
+      }else{
+          rPointer--;
+      }
+  }
+ 
+  return maxArea;
 }
 
 const numArr9 = [1, 8, 6, 2, 5, 4, 8, 3, 7];
-console.log(
-  `Maximum water container area for [${numArr9}] is ${maxArea(numArr9)}`
-);
-*/
+//console.log(
+//  `Maximum water container area for [${numArr9}] is ${findMaxArea(numArr9)}`
+//);
+
 
 // QUESTION 10 ------ Running Sum of 1D Array
-/*
+
 function runningSum(nums: number[]): number[] {
-  // TODO: Implement
-  return [];
+   let prefixSum = 0;
+   
+   for(let i = 0; i < nums.length; i++){
+     prefixSum  += nums[i]!;
+
+     nums[i]! = prefixSum;
+
+   }
+
+  return nums;
 }
 
 const numArr10 = [1, 2, 3, 4];
 console.log(
   `Running sum of [${numArr10}] is ${runningSum(numArr10)}`
 );
-*/
+
