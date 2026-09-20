@@ -6,11 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default [
   {
-    ignores: [
-      'build',
-      'node_modules',
-      'eslint.config.mjs', // 👈 add this
-    ],
+    ignores: ['build', 'node_modules', 'eslint.config.mjs'],
   },
 
   ...tseslint.configs.recommended,
