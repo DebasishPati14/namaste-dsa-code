@@ -3,7 +3,7 @@ const reverseStr = function (str: string, k: number): string {
 
   for (let i = 0; i < str.length; i += k * 2) {
     const subStr = str.substring(i, 2 * k + i);
-    resStr += reverse(subStr, k);
+    resStr += subStr.length >= 2 * k ? reverse(subStr, k) : subStr;
   }
 
   return resStr;
@@ -20,7 +20,7 @@ const reverse = (str: string, k: number): string => {
   return revStr;
 };
 
-const s = 'abcdefg';
+const s = 'abcdefghijkl';
 const kTh = 2;
 
 console.log({ reverseStr: reverseStr(s, kTh) });
