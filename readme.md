@@ -147,8 +147,8 @@
 ### String Manipulation
 
 - [x] Largest Odd Number in a String
-- [ ] Longest Common Prefix
-- [ ] Valid Anagram
+- [x] Longest Common Prefix
+- [x] Valid Anagram
 - [ ] Isomorphic Strings
 
 ### Anagrams
